@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
@@ -19,8 +22,14 @@ class AuthController extends Controller
         return view('Auth.register');
     }
 
-    public function doRegister (Request $request) {
-        return redirect()->route('dash.index');
+    public function doRegister (RegisterRequest $request) {
+        User::create([
+            'matricule' => $request->matricule,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'email_verified_at' => now(),
+        ]);
+        return redirect()->route('auth.login')->with('success', 'Account created successfully');
     }
 
     public function logout (Request $request) {
