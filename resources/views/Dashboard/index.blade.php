@@ -216,9 +216,10 @@
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Resultat',
                     data: [12, 19, 3, 5, 2, 3],
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: ['#FF0000', '#0000FF', '#FFFF00', '#008000', '#800080', '#FFA500']
                 }]
             },
             options: {
@@ -234,11 +235,12 @@
         new Chart(ctxy, {
             type: 'doughnut',
             data: {
-                labels: ['Red', 'Blue', 'Yellow'],
+                labels: ['Red', 'Blue', 'Yellow', 'Green'],
                 datasets: [{
                     label: '# of Votes',
-                    data: [12, 19, 3],
-                    borderWidth: 1
+                    data: [12, 19, 3, 7],
+                    borderWidth: 1,
+                    backgroundColor: ['#FF0000', '#0000FF', '#FFFF00', '#008000']
                 }]
             },
             options: {
