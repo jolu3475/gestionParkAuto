@@ -8,9 +8,10 @@
     <title>@yield('titre')</title>
     @vite('resources/css/app.css', 'ressources/js/app.js')
     <script src="{{ asset('flowbite/JS/flowbite.min.js') }}"></script>
+    @yield('head')
 </head>
 
-<body>
+<body class="bg-gray-100">
 
     @include('component.header')
 
