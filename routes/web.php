@@ -15,18 +15,18 @@ use App\Http\Controllers\DashController;
 |
 */
 
-Route::name('index')->get('/', function () {
+Route::name('index')->middleware('guest')->get('/', function () {
     return view('welcome');
 });
 
 Route::name('auth.')->controller(AuthController::class)->group( function() {
-    Route::get('/login', 'login')->name('login');
-    Route::post('/login', 'doLogin')->name('doLogin');
-    Route::get('/register', 'register')->name('register');
-    Route::post('/register', 'doRegister')->name('doRegister');
-    Route::delete('/logout', 'logout')->name('logout');
+    Route::get('/login', 'login')->name('login')->middleware('guest');
+    Route::post('/login', 'doLogin')->name('doLogin')->middleware('guest');
+    Route::get('/register', 'register')->name('register')->middleware('guest');
+    Route::post('/register', 'doRegister')->name('doRegister')->middleware('guest');
+    Route::delete('/logout', 'logout')->name('logout')->middleware('auth');
 });
 
-Route::prefix('/dash')->name('dash.')->controller(DashController::class)->group( function() {
+Route::prefix('/dash')->name('dash.')->middleware('auth')->controller(DashController::class)->group( function() {
     Route::get('/', 'index')->name('index');
 });

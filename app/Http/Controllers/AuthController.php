@@ -22,7 +22,7 @@ class AuthController extends Controller
             return redirect()->intended(route('dash.index'));
         }
 
-        return redirect()->back()->with('error', 'Vérifiez vos identifiants');
+        return to_route('auth.login')->with('error', 'Vérifiez vos identifiants')->onlyInput('username');
     }
 
     public function register (Request $request) {
