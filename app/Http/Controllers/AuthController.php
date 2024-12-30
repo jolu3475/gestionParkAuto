@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\loginRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\RegisterRequest;
 
@@ -14,8 +16,13 @@ class AuthController extends Controller
         return view('Auth.login');
     }
 
-    public function doLogin (Request $request) {
-        return redirect()->route('dash.index');
+    public function doLogin (loginRequest $request) {
+        if(Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            $request->session()->regenerate();
+            return redirect()->intended(route('dash.index'));
+        }
+
+        return redirect()->back()->with('error', 'Vérifiez vos identifiants');
     }
 
     public function register (Request $request) {
@@ -33,6 +40,7 @@ class AuthController extends Controller
     }
 
     public function logout (Request $request) {
+        Auth::logout();
         return redirect()->route('index');
     }
 
