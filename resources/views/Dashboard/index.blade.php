@@ -13,13 +13,7 @@
                 <canvas id="myChart"></canvas>
             </div>
             <div class="rounded bg-white shadow-md dark:bg-gray-800 p-4">
-                <p class="text-2xl text-gray-400 dark:text-gray-500">
-                    <svg class="w-3.5 h-3.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 18 18">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 1v16M1 9h16" />
-                    </svg>
-                </p>
+                <canvas id="myChart2"></canvas>
             </div>
             <div class="rounded bg-white shadow-md dark:bg-gray-800 p-4">
                 <canvas id="myChart1"></canvas>
@@ -233,6 +227,27 @@
         const ctxy = document.getElementById('myChart1');
 
         new Chart(ctxy, {
+            type: 'doughnut',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 7],
+                    borderWidth: 1,
+                    backgroundColor: ['#FF0000', '#0000FF', '#FFFF00', '#008000']
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        const ctxz = document.getElementById('myChart2');
+
+        new Chart(ctxz, {
             type: 'doughnut',
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green'],

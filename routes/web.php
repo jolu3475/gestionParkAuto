@@ -29,4 +29,6 @@ Route::name('auth.')->controller(AuthController::class)->group( function() {
 
 Route::prefix('/dash')->name('dash.')->middleware('auth')->controller(DashController::class)->group( function() {
     Route::get('/', 'index')->name('index');
+    Route::get('/profile', 'profile')->name('profile');
+    Route::get('/users', 'users')->name('users');
 });
