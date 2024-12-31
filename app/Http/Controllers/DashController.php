@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class DashController extends Controller
 {
@@ -44,5 +45,18 @@ class DashController extends Controller
         }
         $user->delete();
         return redirect()->route('dash.users.users')->with('success', 'Utilisateur supprimer avec succès');
+    }
+
+    public function updateUser ( Request $request, User $user ) {
+        $request->validate([
+            'username' => ['required', 'string', Rule::unique('users')->ignore($user->id)],
+            'matricule' => ['required', 'string', Rule::unique('users')->ignore($user->id), 'regex:/[A-Z]{4}(-)[0-9]{5}/', 'max:11'],
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ]);
+        $user->username = $request->username;
+        $user->matricule = $request->matricule;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect()->route('dash.profile', $user)->with('success', 'Utilisateur modifier avec succès');
     }
 }
