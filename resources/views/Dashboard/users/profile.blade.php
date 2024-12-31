@@ -35,7 +35,8 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <a href="{{ route('dash.index') }}">Retour</a>
+                <a href="{{ route('dash.index') }}"
+                    class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Retour</a>
             </div>
         </div>
         <div class="mb-4 rounded bg-white shadow-md dark:bg-gray-800 p-4">
