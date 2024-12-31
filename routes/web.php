@@ -30,5 +30,12 @@ Route::name('auth.')->controller(AuthController::class)->group( function() {
 Route::prefix('/dash')->name('dash.')->middleware('auth')->controller(DashController::class)->group( function() {
     Route::get('/', 'index')->name('index');
     Route::get('/profile', 'profile')->name('profile');
-    Route::get('/users', 'users')->name('users');
+    Route::get('/user', 'user')->name('user');
+    Route::prefix('/users')->name('users.')->group( function() {
+        Route::get('/', 'users')->name('users');
+        Route::get('/{user}', 'user')->name('user');
+        Route::put('/{user}', 'updateUser')->name('updateUser');
+        Route::delete('/{user}', 'deleteUser')->name('deleteUser');
+        Route::post('/{user}/addSu', 'addSu')->name('addSu');
+    });
 });
