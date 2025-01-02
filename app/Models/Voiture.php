@@ -2,10 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Maintenance;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Voiture extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'plaque',
+        'marque',
+        'modele',
+        'utilisateur',
+    ];
+
+    public function maintenances()
+    {
+        return $this->hasMany(Maintenance::class);
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -58,5 +59,19 @@ class DashController extends Controller
         $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->route('dash.profile', $user)->with('success', 'Utilisateur modifier avec succès');
+    }
+
+    public function maintenance (Request $request) {
+        $maintenances = Maintenance::all();
+        if($maintenances->isEmpty()){
+            $maintenances= ['vide' => true];
+        }else{
+            $maintenances= ['vide' => false];
+        }
+        return view('Dashboard.maintenance', compact('maintenances'));
+    }
+
+    public function intitule (Request $request) {
+        return view('Dashboard.intitule');
     }
 }
