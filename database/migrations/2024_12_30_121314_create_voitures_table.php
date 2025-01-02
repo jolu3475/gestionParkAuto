@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('plaque')->unique();
             $table->string('marque');
             $table->string('modele');
-            $table->string('utilisateur');
             $table->timestamps();
         });
     }

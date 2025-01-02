@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Voiture;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\addVoiture;
 
 class DashController extends Controller
 {
@@ -63,15 +65,33 @@ class DashController extends Controller
 
     public function maintenance (Request $request) {
         $maintenances = Maintenance::all();
-        if($maintenances->isEmpty()){
-            $maintenances= ['vide' => true];
-        }else{
-            $maintenances= ['vide' => false];
-        }
         return view('Dashboard.maintenance', compact('maintenances'));
     }
 
-    public function intitule (Request $request) {
-        return view('Dashboard.intitule');
+    public function voiture (Request $request) {
+        $voiture = Voiture::get();
+        return view('Dashboard.voiture', compact('voiture'));
+    }
+
+    public function ajoutVoiture (addVoiture $request){
+        Voiture::create($request->validated());
+        return redirect()->route('dash.voiture')->with('success', 'La voiture a été ajouter avec succes');
+    }
+
+    public function voi (Request $request, voiture $voiture){
+        return view('Dashboard.voiture.voiture', compact('voiture'));
+    }
+
+    public function editVoiture (Request $request, voiture $voiture) {
+        $request->validate([
+            'plaque' => ['required', Rule::unique('voitures')->ignore($voiture->id)],
+            'modele' => ['required'],
+            'marque' => ['required']
+        ]);
+        $voiture->plaque = $request->plaque;
+        $voiture->modele = $request->modele;
+        $voiture->marque = $request->marque;
+        $voiture->save();
+        return redirect()->route('dash.voi', $voiture->id)->with('success', 'Voiture modifier avec succès');
     }
 }
