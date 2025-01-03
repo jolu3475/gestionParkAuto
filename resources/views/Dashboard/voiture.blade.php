@@ -57,7 +57,9 @@
                 </tbody>
             </table>
         </div>
-        @include('Dashboard.voiture.addVoiture')
+        @if (Auth::user()->su == 1)
+            @include('Dashboard.voiture.addVoiture')
+        @endif
     </div>
 
     @include('include.simpleDatatable')
