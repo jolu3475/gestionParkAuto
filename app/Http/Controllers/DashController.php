@@ -53,14 +53,21 @@ class DashController extends Controller
     public function updateUser ( Request $request, User $user ) {
         $request->validate([
             'username' => ['required', 'string', Rule::unique('users')->ignore($user->id)],
-            'matricule' => ['required', 'string', Rule::unique('users')->ignore($user->id), 'regex:/[A-Z]{4}(-)[0-9]{5}/', 'max:11'],
-            'password' => ['required', 'string', 'min:4', 'confirmed'],
+            'matricule' => ['required', 'string', Rule::unique('users')->ignore($user->id), 'regex:/[A-Z]{4}(-)[0-9]{5}/', 'max:11']
         ]);
         $user->username = $request->username;
         $user->matricule = $request->matricule;
-        $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->route('dash.profile', $user)->with('success', 'Utilisateur modifier avec succès');
+    }
+
+    public function updatePass ( Request $request, user $user) {
+        $request->validate([
+            'password' => ['required', 'string', 'min:4', 'confirmed'],
+        ]);
+        $user->password = $request->password;
+        $user->save();
+        return redirect()->route('dash.profile', $user)->with('success', 'Mots de passe modifier avec succès');
     }
 
     public function maintenance (Request $request) {

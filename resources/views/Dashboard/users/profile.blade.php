@@ -40,6 +40,7 @@
             </div>
         </div>
         <div class="mb-4 rounded bg-white shadow-md dark:bg-gray-800 p-4">
+            <p>Modifier votre nom d'utilisateur ou matricule</p>
             <form action="{{ route('dash.users.updateUser', Auth::user()->id) }}" method="post">
                 @csrf
                 @method('put')
@@ -67,6 +68,17 @@
                     <input type="text" name="username" id="username" value="{{ Auth::user()->username }}"
                         class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
+                <div class="mt-4 flex justify-end">
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Modifier</button>
+                </div>
+            </form>
+        </div>
+        <div class="mb-4 rounded bg-white shadow-md dark:bg-gray-800 p-4">
+            <p>Modifier votre mot de passe</p>
+            <form action="{{ route('dash.users.updatePass', Auth::user()->id) }}" method="post">
+                @csrf
+                @method('put')
                 @error('password')
                     <div
                         class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-4 rounded dark:bg-red-900 dark:text-red-300 mb-4">

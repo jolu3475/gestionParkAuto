@@ -40,6 +40,7 @@ Route::prefix('/dash')->name('dash.')->middleware('auth')->controller(DashContro
         Route::get('/', 'users')->name('users');
         Route::get('/{user}', 'user')->name('user');
         Route::put('/{user}', 'updateUser')->name('updateUser');
+        Route::put('/{user}/updatePass', 'updatePass')->name('updatePass');
         Route::delete('/{user}', 'deleteUser')->name('deleteUser');
         Route::post('/{user}/addSu', 'addSu')->name('addSu');
     });
