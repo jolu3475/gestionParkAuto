@@ -35,31 +35,31 @@
                                 <i class="fa-solid fa-arrow-down-a-z pl-2"></i>
                             </span>
                         </th>
-                        <th>
+                        {{-- <th>
                             <span class="flex items-center">
                                 Regarder
                             </span>
-                        </th>
+                        </th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($maintenances as $main)
-                        @dd($main)
                         <tr>
-                            <td>{{ $main->voiture()->plaque }}</td>
-                            <td>{{ $main->reparation()->type }}</td>
+                            <td>{{ $main->voiture?->plaque }}</td>
+                            <td>{{ $main->reparation?->type }}</td>
                             <td>
                                 {{ $main->debut }}
                             </td>
-                            <td>
-                                <a href="{{ route('dash.users.user', $user->id) }}"
+                            {{-- <td>
+                                <a href="{{ route('dash.main', $main->id) }}"
                                     class="text-blue-500 hover:text-blue-700">Regarder</a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+        @include('Dashboard.maintenance.addMain')
     </div>
 
     @include('include.simpleDatatable')

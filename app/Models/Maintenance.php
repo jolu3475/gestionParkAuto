@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Voiture;
-use App\Models\Reparation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -19,7 +17,7 @@ class Maintenance extends Model
 
     public function voiture()
     {
-        return $this->belongsTo(Voiture::class);
+        return $this->belongsTo(Voiture::class, 'voiture_id', 'id');
     }
 
     public function reparation()

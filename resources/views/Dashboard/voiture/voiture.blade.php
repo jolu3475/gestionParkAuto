@@ -51,6 +51,7 @@
                 </thead>
                 <tbody>
                     @foreach ($voiture->maintenances as $main)
+                        @dd($main->voiture())
                         <tr>
                             <td>{{ $voiture->maintenances->voiture()->plaque }}</td>
                             <td>{{ $voiture->maintenances->reparation()->type }}</td>

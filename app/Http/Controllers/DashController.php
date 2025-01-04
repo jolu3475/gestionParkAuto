@@ -80,8 +80,27 @@ class DashController extends Controller
 
     /* Visualiser les maintances */
     public function maintenance (Request $request) {
-        $maintenances = Maintenance::all();
-        return view('Dashboard.maintenance', compact('maintenances'));
+        $maintenances = Maintenance::with('voiture', 'reparation')->get();
+        $voitures = Voiture::all();
+        $reparations = Reparation::all();
+        // dd($maintenances->first()->reparation());
+        return view('Dashboard.maintenance', compact('maintenances', 'voitures', 'reparations'));
+    }
+
+    /* Ajouter une maintenance */
+    public function addMain (Request $request) {
+        $request->validate([
+            'voiture_id' => ['required', 'exists:voitures,id'],
+            'reparation_id' => ['required', 'exists:reparations,id'],
+        ]);
+        $request->merge(['debut' => date('Y-m-d')]);
+        Maintenance::create($request->all());
+        return redirect()->route('dash.maintenance')->with('success', 'Maintenance ajouter avec succès');
+    }
+
+    /* Visualiser la maintenance */
+    public function main (Request $request, Maintenance $maintenance) {
+        return view('Dashboard.maintenance.main', compact('maintenance'));
     }
 
     /* Visualiser les voitures */

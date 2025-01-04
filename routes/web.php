@@ -32,6 +32,8 @@ Route::prefix('/dash')->name('dash.')->middleware('auth')->controller(DashContro
     Route::get('/profile', 'profile')->name('profile');
     Route::get('/user', 'user')->name('user');
     Route::get('/maintenance', 'maintenance')->name('maintenance');
+    Route::post('/addMain', 'addMain')->name('addMain');
+    Route::post('{maintenance}/main', 'main')->name('main');
     Route::get('/intituler', 'intituler')->name('intituler');
     Route::post('/addInt', 'addInt')->name('addInt');
     Route::get('{reparation}/editInt', 'editInt')->name('editInt');
