@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Voiture;
+use App\Models\Reparation;
 use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -100,5 +101,31 @@ class DashController extends Controller
         $voiture->marque = $request->marque;
         $voiture->save();
         return redirect()->route('dash.voi', $voiture->id)->with('success', 'Voiture modifier avec succès');
+    }
+
+    public function intituler (Request $request) {
+        $intituler = Reparation::all();
+        return view('Dashboard.intituler', compact('intituler'));
+    }
+
+    public function addInt (Request $request) {
+        $request->validate([
+            'type' => ['required', 'string', 'unique:reparations']
+        ]);
+        Reparation::create($request->all());
+        return redirect()->route('dash.intituler')->with('success', 'Intituler ajouter avec succès');
+    }
+
+    public function editInt (Request $request, Reparation $reparation) {
+        return view('Dashboard.intituler.edit', compact('reparation'));
+    }
+
+    public function updateInt (Request $request, Reparation $reparation) {
+        $request->validate([
+            'type' => ['required', 'string', Rule::unique('reparations')->ignore($reparation->id)]
+        ]);
+        $reparation->type = $request->type;
+        $reparation->save();
+        return redirect()->route('dash.intituler')->with('success', 'Intituler modifier avec succès');
     }
 }
