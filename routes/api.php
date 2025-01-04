@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::prefix('chart')->middleware(['web'])->name('chart.')->controller(ChartController::class)->group( function() {
+    Route::get('/voiture', 'voiture')->name('voiture');
+    Route::get('/reparation', 'reparation')->name('reparation');
+    Route::get('/maintenance', 'maintenance')->name('maintenance');
+    Route::get('/intituler', 'intituler')->name('intituler');
 });

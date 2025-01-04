@@ -15,7 +15,8 @@ class DashController extends Controller
     //
     /* Acceil de la dashboard */
     public function index (Request $request) {
-        return view('Dashboard.index');
+        $maintenances = Maintenance::all();
+        return view('Dashboard.index', compact('maintenances'));
     }
 
     /* Parametre du compte utilisateur */
