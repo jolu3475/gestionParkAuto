@@ -19,6 +19,9 @@
                     class="text-red-500">{{ $voiture->modele }}</span> avec la plaque <span class="text-red-500">
                     {{ $voiture->plaque }}</span>
             </p>
+            <p class="mt-5">
+                Voici la liste des interventions sur cette voiture
+            </p>
             <table id="export-table">
                 <thead>
                     <tr>
@@ -42,25 +45,15 @@
                                 <i class="fa-solid fa-arrow-down-a-z pl-2"></i>
                             </span>
                         </th>
-                        <th>
-                            <span class="flex items-center">
-                                Regarder
-                            </span>
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($voiture->maintenances as $main)
-                        @dd($main->voiture())
                         <tr>
-                            <td>{{ $voiture->maintenances->voiture()->plaque }}</td>
-                            <td>{{ $voiture->maintenances->reparation()->type }}</td>
+                            <td>{{ $main->voiture?->plaque }}</td>
+                            <td>{{ $main->reparation?->type }}</td>
                             <td>
-                                {{ $voiture->maintenances->debut }}
-                            </td>
-                            <td>
-                                <a href="{{ route('dash.users.user', $user->id) }}"
-                                    class="text-blue-500 hover:text-blue-700">Regarder</a>
+                                {{ $main->debut }}
                             </td>
                         </tr>
                     @endforeach
