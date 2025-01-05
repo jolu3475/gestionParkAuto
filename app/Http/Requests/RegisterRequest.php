@@ -23,7 +23,7 @@ class RegisterRequest extends FormRequest
     {
         return [
             //
-            'matricule' => ['required', 'string', 'regex:/[A-Z]{4}(-)[0-9]{5}/', 'max:11' , 'unique:users'],
+            'matricule' => ['required', 'string', 'max:7' , 'unique:users'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:4', 'confirmed'],
         ];

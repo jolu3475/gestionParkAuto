@@ -61,7 +61,7 @@ class DashController extends Controller
     public function updateUser ( Request $request, User $user ) {
         $request->validate([
             'username' => ['required', 'string', Rule::unique('users')->ignore($user->id)],
-            'matricule' => ['required', 'string', Rule::unique('users')->ignore($user->id), 'regex:/[A-Z]{4}(-)[0-9]{5}/', 'max:11']
+            'matricule' => ['required', 'string', Rule::unique('users')->ignore($user->id), 'max:7']
         ]);
         $user->username = $request->username;
         $user->matricule = $request->matricule;
