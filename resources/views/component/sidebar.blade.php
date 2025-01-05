@@ -32,8 +32,12 @@
             <li>
                 <a href="{{ route('dash.voiture') }}" {{-- class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group" --}} @class([
                     'flex items-center p-2 text-gray-900 rounded-lg dark:text-white  dark:hover:bg-gray-700 group',
-                    'hover:bg-gray-100' => !Str::startsWith($route, 'dash.voiture'),
-                    'bg-gray-100' => Str::startsWith($route, 'dash.voiture'),
+                    'hover:bg-gray-100' =>
+                        !Str::startsWith($route, 'dash.voiture') ||
+                        !Str::startsWith($route, 'dash.voi'),
+                    'bg-gray-100' =>
+                        Str::startsWith($route, 'dash.voiture') ||
+                        Str::startsWith($route, 'dash.voi'),
                 ])>
                     <i
                         class="fa-solid fa-car flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"></i>
