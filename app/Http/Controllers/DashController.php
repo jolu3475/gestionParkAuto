@@ -9,6 +9,7 @@ use App\Models\Maintenance;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Requests\addVoiture;
+use Illuminate\Support\Facades\Auth;
 
 class DashController extends Controller
 {
@@ -26,7 +27,11 @@ class DashController extends Controller
 
     /* Gestion des utilisateurs */
     public function users (Request $request) {
-        $users = User::all();
+        if(Auth::user()->id != 1){
+            $users = User::where('id', '!=', 1)->get();
+        }else{
+            $users = User::all();
+        }
         return view('Dashboard.users', compact('users'));
     }
 
