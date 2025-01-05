@@ -64,8 +64,10 @@
                     class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Retour</a>
             </div>
         </div>
-        <div class="rounded bg-white shadow-md dark:bg-gray-800 p-4 mt-5">
-            @include('Dashboard.voiture.editVoiture')
-        </div>
+        @if ($voiture->etat !== 2)
+            <div class="rounded bg-white shadow-md dark:bg-gray-800 p-4 mt-5">
+                @include('Dashboard.voiture.editVoiture')
+            </div>
+        @endif
         @include('include.simpleDatatable')
     @endsection
