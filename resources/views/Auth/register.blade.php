@@ -51,5 +51,8 @@
             <button type="submit"
                 class="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">S'inscrire</button>
         </div>
+        <div>
+            <a href="{{ route('auth.login') }}" class="text-blue-500 hover:underline">Se connecter</a>
+        </div>
     </form>
 @endsection

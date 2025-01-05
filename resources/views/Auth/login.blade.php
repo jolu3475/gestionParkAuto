@@ -32,5 +32,8 @@
             <button type="submit" class="w-full p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Se
                 connecter</button>
         </div>
+        <div>
+            <a href="{{ route('auth.register') }}" class="text-blue-500 hover:underline">Créer un compte</a>
+        </div>
     </form>
 @endsection
