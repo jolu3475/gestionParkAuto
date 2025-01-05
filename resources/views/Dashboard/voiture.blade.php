@@ -35,6 +35,16 @@
                         </th>
                         <th>
                             <span class="flex items-center">
+                                Utilisateur
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
+                                Etat
+                            </span>
+                        </th>
+                        <th>
+                            <span class="flex items-center">
                                 Regarder
                             </span>
                         </th>
@@ -48,6 +58,17 @@
                             <td>
                                 {{ $main->modele }}
                             </td>
+                            <td>
+                                {{ $main->utilisateur }}
+                            </td>
+                            <td>
+                                @if ($main->etat == 0)
+                                    <span class="bg-red-500 text-white rounded-full py-1 px-2">Sur cale</span>
+                                @elseif($main->etat == 1)
+                                    <span class="bg-green-500 text-white rounded-full py-1 px-2">En marche</span>
+                                @else
+                                    <span class="bg-yellow-500 text-white rounded-full py-1 px-2">Condanné</span>
+                                @endif
                             <td>
                                 <a href="{{ route('dash.voi', $main->id) }}"
                                     class="text-blue-500 hover:text-blue-700">Regarder</a>

@@ -25,7 +25,9 @@ class addVoiture extends FormRequest
             //
             'plaque' => ['required', 'unique:voitures,plaque'],
             'marque' => ['required'],
-            'modele' => ['required']
+            'modele' => ['required'],
+            'etat' => ['required'],
+            'utilisateur' => ['required']
         ];
     }
 }

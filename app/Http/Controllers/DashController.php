@@ -126,11 +126,15 @@ class DashController extends Controller
         $request->validate([
             'plaque' => ['required', Rule::unique('voitures')->ignore($voiture->id)],
             'modele' => ['required'],
-            'marque' => ['required']
+            'marque' => ['required'],
+            'utilisateur' => ['required'],
+            'etat' => ['required']
         ]);
         $voiture->plaque = $request->plaque;
         $voiture->modele = $request->modele;
         $voiture->marque = $request->marque;
+        $voiture->utilisateur = $request->utilisateur;
+        $voiture->etat = $request->etat;
         $voiture->save();
         return redirect()->route('dash.voi', $voiture->id)->with('success', 'Voiture modifier avec succès');
     }

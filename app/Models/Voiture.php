@@ -14,6 +14,8 @@ class Voiture extends Model
         'plaque',
         'marque',
         'modele',
+        'etat',
+        'utilisateur'
     ];
 
     public function maintenances()
