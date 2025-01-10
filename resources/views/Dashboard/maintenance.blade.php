@@ -1,6 +1,6 @@
 @extends('BaseDash')
 
-@section('title')
+@section('titre')
     Maintenance
 @endsection
 
