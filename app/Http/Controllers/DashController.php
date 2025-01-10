@@ -27,11 +27,7 @@ class DashController extends Controller
 
     /* Gestion des utilisateurs */
     public function users (Request $request) {
-        if(Auth::user()->id != 1){
-            $users = User::where('id', '!=', 1)->get();
-        }else{
-            $users = User::all();
-        }
+        $users = User::where('id', '!=', 1)->get();
         return view('Dashboard.users', compact('users'));
     }
 
@@ -43,7 +39,7 @@ class DashController extends Controller
     /* Ajouter en temps que su ou la retirer */
     public function addSu ( Request $request, User $user ) {
         if ($user->su == 1) {
-            $users = User::where('su', 1)->count();
+            $users = User::where('id', '!=', 1)->where('su', 1)->count();
             if ($users <= 1) {
                 return redirect()->route('dash.users.user', $user)->with('error', 'Impossible de retirer le dernier super utilisateur');
             }
